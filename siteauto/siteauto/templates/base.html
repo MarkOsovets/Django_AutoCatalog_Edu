@@ -1,0 +1,34 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link type="text/css" href={% static "auto/css/styles.css" %} rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <ul class="menu">
+    <li><a href="{% url 'index' %}">Home page</a></li>
+    
+    {% for m in menu %}
+        {% if not forloop.last %}
+            <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+        {% endif %}
+    {% endfor %}
+    
+    {% if user.is_authenticated %}
+        <li class="last">
+            <a href="{% url 'users:profile' %}">{{ user.username }}</a> | <a href="{% url 'users:logout' %}">Выйти</a>
+        </li>
+    {% else %}
+        <li class="last">
+            <a href="{% url 'users:login' %}">Login</a> | <a href="{% url 'users:register' %}">Register</a>
+        </li>
+    {% endif %}
+</ul>
+    {% block content %}{% endblock %}
+    {% block navigation %}{% endblock %}
+</body>
+</html>

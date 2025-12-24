@@ -1,0 +1,14 @@
+/* Make all images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Optional: nicer look for images inside article content */
+.article-content img,
+.post-content img,
+.content img {
+  border-radius: 8px;
+  margin: 10px 0;
+}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load autotags %}
+
+{% block content %}
+{# Безопасный вызов с значением по умолчанию #}
+{% show_categories cat_selected|default:None %}
+
+<h1>{{ title }}</h1>
+
+<ul>
+    {% for p in posts %}
+    <li>
+        <p class="first">Категория: {{ p.cat.name }} | автор: {{ p.author.username|default:"Неизвестен"}}</p>
+        <div class="article-panel">
+            <p class="first">Категория: {{ p.cat }}</p>
+            <p class="last">Дата: {{ p.time_update|date:"d-m-Y H:i:s" }}</p>
+        </div>
+        
+        <h2>{{ p.title }}</h2>
+        {% if p.photo %}
+        <img class="img-article-left thumb"
+            src="{{ p.photo.url }}"
+            alt="{{ p.title }}"
+            style="width: 320px; max-width: 100%; height: auto;"
+            loading="lazy"
+            decoding="async">
+        {% endif %}        
+        {# Обрезать длинный контент #}
+        <p>{{ p.content|truncatewords:30 }}</p>
+        
+        <p><a href="{{ p.get_absolute_url }}">Read the post</a></p>
+        
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li>No posts available.</li>
+    {% endfor %}
+</ul>
+{% endblock content %}
+
+{% block navigation %}
+<!--Больше ли одной страницы -->
+{% if page_obj.has_other_pages %}
+<nav class="list-pages">
+    <ul>
+        {{pagination.page_range}}
+        {% for p in paginator.page_range %}
+        {% if page_obj.number == p %}
+        <li class="page-num page-num-selected">{{ p }}</li>
+        {% else %}
+        <li class="page_num">
+            <a href="?page={{p}}">{{ p }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+
+{% endif %}
+{% endblock navigation %}

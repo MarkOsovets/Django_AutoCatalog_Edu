@@ -1,0 +1,26 @@
+[
+    {
+        "model": "auto.category",
+        "pk": 1,
+        "fields": {
+            "name": "Минивены",
+            "slug": "minivens"
+        }
+    },
+    {
+        "model": "auto.category",
+        "pk": 2,
+        "fields": {
+            "name": "Универсалы",
+            "slug": "universals"
+        }
+    },
+    {
+        "model": "auto.category",
+        "pk": 3,
+        "fields": {
+            "name": "Микроавтобусы",
+            "slug": "microbuses"
+        }
+    }
+]

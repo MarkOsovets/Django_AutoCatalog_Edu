@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{post.title}}</h1>
+
+{% if post.photo %}
+<img class="img-article-left thumb"
+     src="{{ post.photo.url }}"
+     alt="{{ post.title }}"
+     style="width: 320px; max-width: 100%; height: auto;"
+     loading="lazy"
+     decoding="async">
+{% endif %}
+
+{{post.content|linebreaks}}
+<hr>
+{% endblock %}
